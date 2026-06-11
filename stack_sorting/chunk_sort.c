@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anita <anita@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 12:07:09 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/03 08:39:33 by anita            ###   ########.fr       */
+/*   Updated: 2026/06/11 15:04:19 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ t_node	*find_max(t_stack *b)
 		current = current->next;
 	}
 	return (max);
+}
+
+static void	restore_to_a_chunk(t_stack *a, t_stack *b)
+{
+	t_node	*max;
+
+	while (b->size > 0)
+	{
+		max = find_max(b);
+		bring_to_top(b, max);
+		pa(a, b);
+	}
 }
 
 void	push_chunks(t_stack *a, t_stack *b)
@@ -53,16 +65,18 @@ void	push_chunks(t_stack *a, t_stack *b)
 		}
 	}
 }
+
 void	init_chunks(t_stack *a)
 {
 	a->chunk_size = a->size / 5;
 	if (a->chunk_size < 1)
 		a->chunk_size = 1;
 }
+
 void	chunk_sort(t_stack *a, t_stack *b)
 {
 	normalize_index(a);
 	init_chunks(a);
 	push_chunks(a, b);
-	restore_to_a(a, b);
+	restore_to_a_chunk(a, b);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/01 22:01:29 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/03                                ###   ########.fr   */
+/*   Created: 2026/06/11 15:02:38 by anmakhov          #+#    #+#             */
+/*   Updated: 2026/06/11 15:02:39 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_node
 	int				index;
 	struct s_node	*next;
 	struct s_node	*prev;
-}	t_node;
+}					t_node;
 
 /*
 ** =========================================================
@@ -50,11 +50,11 @@ typedef struct s_node
 
 typedef struct s_stack
 {
-	t_node	*top;
-	t_node	*bottom;
-	int		size;
-	int		chunk_size;
-}	t_stack;
+	t_node			*top;
+	t_node			*bottom;
+	int				size;
+	int				chunk_size;
+}					t_stack;
 
 /*
 ** =========================================================
@@ -64,23 +64,23 @@ typedef struct s_stack
 */
 
 /* Swap operations */
-void	sa(t_stack *a);
-void	sb(t_stack *b);
-void	ss(t_stack *a, t_stack *b);
+void				sa(t_stack *a);
+void				sb(t_stack *b);
+void				ss(t_stack *a, t_stack *b);
 
 /* Push operations */
-void	pa(t_stack *a, t_stack *b);
-void	pb(t_stack *a, t_stack *b);
+void				pa(t_stack *a, t_stack *b);
+void				pb(t_stack *a, t_stack *b);
 
 /* Rotate operations (upwards) */
-void	ra(t_stack *a);
-void	rb(t_stack *b);
-void	rr(t_stack *a, t_stack *b);
+void				ra(t_stack *a);
+void				rb(t_stack *b);
+void				rr(t_stack *a, t_stack *b);
 
 /* Reverse rotate operations (downwards) */
-void	rra(t_stack *a);
-void	rrb(t_stack *b);
-void	rrr(t_stack *a, t_stack *b);
+void				rra(t_stack *a);
+void				rrb(t_stack *b);
+void				rrr(t_stack *a, t_stack *b);
 
 /*
 ** =========================================================
@@ -92,28 +92,30 @@ void	rrr(t_stack *a, t_stack *b);
 ** Quicksort helper for normalization
 ** Used to sort array before assigning indexes
 */
-void	quicksort(int *arr, int left, int right);
+void				quicksort(int *arr, int left, int right);
 
 /*
 ** Converts values into normalized indexes (0..n)
 ** Important for radix / bitwise sorting
 */
-void	normalize_index(t_stack *a);
+void				normalize_index(t_stack *a);
 
 /*
 ** Main chunk sorting algorithm (O(n√n) style)
 */
-void	chunk_sort(t_stack *a, t_stack *b);
+void				chunk_sort(t_stack *a, t_stack *b);
 
 /*
 ** Moves selected node to top of stack efficiently
 */
-void	bring_to_top(t_stack *stack, t_node *target);
+void				bring_to_top(t_stack *stack, t_node *target);
 
 /*
 ** Restores elements from stack B back to A
 */
-void	restore_to_a(t_stack *a, t_stack *b);
+void				restore_to_a(t_stack *a, t_stack *b);
+
+t_node				*find_max(t_stack *b);
 
 /*
 ** =========================
@@ -124,28 +126,29 @@ void	restore_to_a(t_stack *a, t_stack *b);
 /*
 ** Initializes stack (sets top/bottom/size = 0/null)
 */
-void	init_stack(t_stack *a);
+void				init_stack(t_stack *a);
 
 /*
 ** Parses argv, fills stack A with integers
 ** returns 1 on success, 0 on error
 */
-int		parse_args(t_stack *a, char **argv);
+int					parse_args(t_stack *a, char **argv);
 
 /*
 ** Checks if stack A is already sorted
 ** returns 1 if sorted, 0 otherwise
 */
-int		is_sorted(t_stack *a);
+int					is_sorted(t_stack *a);
 
 /*
 ** Main sorting dispatcher (chooses algorithm)
 */
-void	sort_stack(t_stack *a, t_stack *b);
+void				sort_stack(t_stack *a, t_stack *b);
 
 /*
 ** Frees all memory used by stack
 */
-void	free_stack(t_stack *a);
+void				free_stack(t_stack *a);
+int					ft_atoi_ps(const char *str, int *error);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalize_index.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anita <anita@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/02 12:07:19 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/03                          ###   ########.fr       */
+/*   Created: 2026/06/11 15:04:37 by anmakhov          #+#    #+#             */
+/*   Updated: 2026/06/11 15:04:38 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	*stack_to_array(t_stack *a)
 
 void	normalize_index(t_stack *a)
 {
-	int		*arr;
+	int	*arr;
 
 	if (!a || !a->top)
 		return ;

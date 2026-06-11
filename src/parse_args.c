@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/03                                #+#    #+#             */
-/*   Updated: 2026/06/03                                ###   ########.fr       */
+/*   Created: 2026/06/11 15:01:53 by anmakhov          #+#    #+#             */
+/*   Updated: 2026/06/11 15:01:56 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,9 @@
 
 /*
 ** =========================
-**      UTILS
-** =========================
-*/
-
-static int	ft_atoi_ps(const char *str, int *error)
-{
-	long	n;
-	int		sign;
-
-	n = 0;
-	sign = 1;
-	*error = 0;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	if (*str == '\0')
-		return (*error = 1, 0);
-	while (*str)
-	{
-		if (*str < '0' || *str > '9')
-			return (*error = 1, 0);
-		n = n * 10 + (*str - '0');
-		if ((n * sign) > 2147483647 || (n * sign) < -2147483648)
-			return (*error = 1, 0);
-		str++;
-	}
-	return ((int)(n * sign));
-}
-
-/*
-** =========================
 **      NODE OPS
 ** =========================
 */
-
 static t_node	*new_node(int value)
 {
 	t_node	*node;
@@ -89,7 +52,6 @@ static void	add_back(t_stack *a, t_node *node)
 **      CHECKERS
 ** =========================
 */
-
 static int	has_duplicate(t_stack *a, int value)
 {
 	t_node	*cur;
@@ -109,13 +71,12 @@ static int	has_duplicate(t_stack *a, int value)
 **      MAIN PARSER
 ** =========================
 */
-
 int	parse_args(t_stack *a, char **argv)
 {
-	int i;
-	int value;
-	int error;
-	t_node *node;
+	int		i;
+	int		value;
+	int		error;
+	t_node	*node;
 
 	i = 0;
 	while (argv[i])
