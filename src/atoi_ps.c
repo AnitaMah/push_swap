@@ -5,65 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2026/06/11 15:05:00 by anmakhov          #+#    #+#             */
 /*   Updated: 2026/06/11 15:50:33 by anmakhov         ###   ########.fr       */
+=======
+/*   Created: 2026/06/11 14:45:02 by anmakhov          #+#    #+#             */
+/*   Updated: 2026/06/11 14:45:37 by anmakhov         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-#include <limits.h>
 
-/*
-** Converts string to integer with error checking.
-** Sets error to 1 if:
-** - String is not a valid integer
-** - Integer overflows/underflows (> INT_MAX or < INT_MIN)
-** - Empty string
-** Returns 0 on error (error flag will be set)
-*/
+static char	*move_iter_after_space(const char *str)
+{
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	return ((char *)str);
+}
+
 int	ft_atoi_ps(const char *str, int *error)
 {
-	long	result;
+	long	n;
 	int		sign;
-	int		i;
 
-	*error = 0;
-	if (!str || *str == '\0')
-	{
-		*error = 1;
-		return (0);
-	}
-	i = 0;
+	n = 0;
 	sign = 1;
+<<<<<<< HEAD
 	result = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\r'
 		|| str[i] == '\v' || str[i] == '\f')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
+=======
+	*error = 0;
+	str = move_iter_after_space(str);
+	if (*str == '-' || *str == '+')
+>>>>>>> refs/remotes/origin/main
 	{
-		if (str[i] == '-')
+		if (*str == '-')
 			sign = -1;
-		i++;
+		str++;
 	}
-	if (str[i] < '0' || str[i] > '9')
+	if (*str == '\0')
+		return (*error = 1, 0);
+	while (*str)
 	{
-		*error = 1;
-		return (0);
+		if (*str < '0' || *str > '9')
+			return (*error = 1, 0);
+		n = n * 10 + (*str - '0');
+		if ((n * sign) > 2147483647 || (n * sign) < -2147483648)
+			return (*error = 1, 0);
+		str++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + (str[i] - '0');
-		if (result > INT_MAX || result * sign < INT_MIN)
-		{
-			*error = 1;
-			return (0);
-		}
-		i++;
-	}
-	if (str[i] != '\0')
-	{
-		*error = 1;
-		return (0);
-	}
-	return ((int)(result * sign));
+	return ((int)(n * sign));
 }

@@ -9,11 +9,13 @@ SRC = src/main.c \
 	src/is_sorted.c \
 	src/sort_stack.c \
 	src/free_stack.c \
+	src/atoi_ps.c \
 	stack_operations/push.c \
 	stack_operations/reverse.c \
 	stack_operations/rotate.c \
 	stack_operations/swap.c \
 	stack_sorting/chunk_sort.c \
+	stack_sorting/bring_to_top.c \
 	stack_sorting/radix_sort.c \
 	stack_sorting/selections_sort_addaptation.c \
 	stack_sorting/untils_sort/normalize_index.c \
@@ -27,7 +29,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -lm
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I . -c $< -o $@
