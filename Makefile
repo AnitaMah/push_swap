@@ -18,6 +18,8 @@ SRC = src/main.c \
 	stack_sorting/selections_sort_addaptation.c \
 	stack_sorting/untils_sort/normalize_index.c \
 	stack_sorting/untils_sort/quick_sort.c \
+	stack_sorting/compute_disorder.c \
+	src/ft_atoi_ps.c \
 	stack_sorting/untils_sort/untils.c
 
 OBJ = $(SRC:.c=.o)

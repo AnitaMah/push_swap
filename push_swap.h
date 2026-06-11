@@ -6,7 +6,7 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 15:02:38 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 15:02:39 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/11 15:27:04 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,7 @@ void				sort_stack(t_stack *a, t_stack *b);
 */
 void				free_stack(t_stack *a);
 int					ft_atoi_ps(const char *str, int *error);
+double				compute_disorder(t_stack *a);
+void				radix_sort(t_stack *a, t_stack *b);
 
 #endif

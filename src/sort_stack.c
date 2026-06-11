@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 15:02:02 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 15:02:06 by anmakhov         ###   ########.fr       */
+/*   Created: 2026/06/03                                #+#    #+#             */
+/*   Updated: 2026/06/11                                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,24 @@ static void	sort_small(t_stack *a)
 
 /*
 ** =========================
-**      MEDIUM SORT
+**      MEDIUM DISORDER
 ** =========================
 */
 
 static void	sort_medium(t_stack *a, t_stack *b)
 {
-	(void)b;
-	normalize_index(a);
 	chunk_sort(a, b);
 }
 
 /*
 ** =========================
-**      LARGE SORT
+**      HIGH DISORDER
 ** =========================
 */
 
 static void	sort_large(t_stack *a, t_stack *b)
 {
-	(void)b;
-	normalize_index(a);
-	chunk_sort(a, b);
+	radix_sort(a, b);
 }
 
 /*
@@ -69,13 +65,19 @@ static void	sort_large(t_stack *a, t_stack *b)
 
 void	sort_stack(t_stack *a, t_stack *b)
 {
-	if (!a || a->size <= 1)
-		return ;
-	if (is_sorted(a))
+	double disorder;
+
+	if (!a || a->size <= 1 || is_sorted(a))
 		return ;
 	if (a->size <= 3)
+	{
 		sort_small(a);
-	else if (a->size <= 100)
+		return ;
+	}
+	disorder = compute_disorder(a);
+	if (disorder < 0.2)
+		sort_small(a);
+	else if (disorder < 0.5)
 		sort_medium(a, b);
 	else
 		sort_large(a, b);

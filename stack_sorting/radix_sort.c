@@ -6,11 +6,17 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 12:07:04 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 13:30:28 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/11 15:34:21 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+void	restore_to_a(t_stack *a, t_stack *b)
+{
+	while (b && b->top)
+		pa(a, b);
+}
 
 void	process_bit(t_stack *a, t_stack *b, int bit)
 {
