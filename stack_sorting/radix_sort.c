@@ -6,24 +6,19 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 12:07:04 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 15:34:21 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/12 13:18:53 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../header_file/push_swap.h"
 
-void	restore_to_a(t_stack *a, t_stack *b)
+/*
+** Pushes or rotates stack A depending on current bit.
+*/
+static void	handle_bit(t_stack *a, t_stack *b, int bit, int size)
 {
-	while (b && b->top)
-		pa(a, b);
-}
-
-void	process_bit(t_stack *a, t_stack *b, int bit)
-{
-	int	size;
 	int	i;
 
-	size = a->size;
 	i = 0;
 	while (i < size)
 	{
@@ -35,43 +30,48 @@ void	process_bit(t_stack *a, t_stack *b, int bit)
 	}
 }
 
-int	get_max_bits(t_stack *a)
+/*
+** Returns number of bits needed for max index.
+*/
+static int	get_max_bits(t_stack *a)
 {
 	int		max;
 	int		bits;
-	t_node	*current;
+	t_node	*cur;
 
 	if (!a || !a->top)
 		return (0);
-	current = a->top;
-	max = current->index;
-	while (current)
+	cur = a->top;
+	max = cur->index;
+	while (cur)
 	{
-		if (current->index > max)
-			max = current->index;
-		current = current->next;
+		if (cur->index > max)
+			max = cur->index;
+		cur = cur->next;
 	}
 	bits = 0;
 	while ((max >> bits) != 0)
-	{
 		bits++;
-	}
 	return (bits);
 }
 
+/*
+** Radix sorting main logic.
+*/
 void	radix_sort(t_stack *a, t_stack *b)
 {
-	int	max_bits;
-	int	i;
+	int max_bits;
+	int size;
+	int i;
 
 	if (!a || !a->top)
 		return ;
-	normalize_index(a);
 	max_bits = get_max_bits(a);
+	size = a->size;
 	i = 0;
 	while (i < max_bits)
 	{
-		process_bit(a, b, i);
+		handle_bit(a, b, i, size);
 		restore_to_a(a, b);
 		i++;
 	}

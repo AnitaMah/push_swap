@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anita <anita@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 14:17:00 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/03 08:42:38 by anita            ###   ########.fr       */
+/*   Updated: 2026/06/12 11:39:07 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../header_file/push_swap.h"
 
 static void	swap_stack(t_stack *stack)
 {

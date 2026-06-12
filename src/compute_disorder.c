@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_stack.c                                       :+:      :+:    :+:   */
+/*   compute_disorder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 15:01:03 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 11:37:16 by anmakhov         ###   ########.fr       */
+/*   Created: 2026/06/12 11:57:53 by anmakhov          #+#    #+#             */
+/*   Updated: 2026/06/12 11:58:19 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_file/push_swap.h"
-
-/*
-** =========================
-**      CORE LOGIC
-** =========================
-*/
-
-/*
-** Frees all nodes in stack and resets structure
-*/
-void	free_stack(t_stack *a)
+double	compute_disorder(int *arr, int size)
 {
-	t_node	*cur;
-	t_node	*next;
+	int	total;
+	int	i;
+	int	j;
+	int	mistakes;
 
-	if (!a)
-		return ;
-	cur = a->top;
-	while (cur)
+	mistakes = 0;
+	total = size * (size - 1) / 2;
+	if (size <= 1)
+		return (0.0);
+	for (i = 0; i < size; i++)
 	{
-		next = cur->next;
-		free(cur);
-		cur = next;
+		for (j = i + 1; j < size; j++)
+		{
+			if (arr[i] > arr[j])
+				mistakes++;
+		}
 	}
-	a->top = NULL;
-	a->bottom = NULL;
-	a->size = 0;
-	a->chunk_size = 0;
+	return ((double)mistakes / (double)total);
 }

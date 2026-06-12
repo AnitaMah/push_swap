@@ -6,11 +6,11 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 15:06:30 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 15:06:31 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/12 14:00:42 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../header_file/push_swap.h"
 
 /*
 ** Restores elements from stack B back to stack A

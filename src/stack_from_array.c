@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   compute_disorder.c                                 :+:      :+:    :+:   */
+/*   stack_from_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 15:25:44 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 15:25:45 by anmakhov         ###   ########.fr       */
+/*   Created: 2026/06/12 11:59:30 by anmakhov          #+#    #+#             */
+/*   Updated: 2026/06/12 11:59:44 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../header_file/push_swap.h"
 
-double	compute_disorder(t_stack *a)
+int	stack_from_array(t_stack *a, int *arr, int size)
 {
-	t_node	*i;
-	t_node	*j;
-	int		mistakes;
-	int		total_pairs;
+	int		i;
+	t_node	*new;
 
-	if (!a || a->size < 2)
-		return (0.0);
-	mistakes = 0;
-	total_pairs = a->size * (a->size - 1) / 2;
-	i = a->top;
-	while (i)
+	i = 0;
+	while (i < size)
 	{
-		j = i->next;
-		while (j)
-		{
-			if (i->index > j->index)
-				mistakes++;
-			j = j->next;
-		}
-		i = i->next;
+		new = malloc(sizeof(t_node));
+		if (!new)
+			return (0);
+		new->value = arr[i];
+		new->index = 0;
+		new->next = NULL;
+		new->prev = a->bottom;
+		if (!a->top)
+			a->top = new;
+		else
+			a->bottom->next = new;
+		a->bottom = new;
+		a->size++;
+		i++;
 	}
-	return ((double)mistakes / total_pairs);
+	return (1);
 }

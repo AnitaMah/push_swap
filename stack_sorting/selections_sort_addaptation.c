@@ -6,11 +6,11 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 22:01:14 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 14:21:15 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/12 14:00:51 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../header_file/push_swap.h"
 
 t_node	*find_min_node(t_stack *a)
 {
@@ -30,7 +30,7 @@ t_node	*find_min_node(t_stack *a)
 	return (min);
 }
 
-void	selections_sort_addaptation(t_stack *a, t_stack *b)
+void	selection_sort_adaptation(t_stack *a, t_stack *b)
 {
 	t_node	*min;
 
@@ -39,7 +39,7 @@ void	selections_sort_addaptation(t_stack *a, t_stack *b)
 		min = find_min_node(a);
 		if (!min)
 			return ;
-		bring_to_top(a, min);
+		bring_to_top(a, min); // <== Додали 'a',
 		pb(a, b);
 	}
 	restore_to_a(a, b);

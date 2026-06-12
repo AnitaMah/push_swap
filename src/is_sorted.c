@@ -6,11 +6,11 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 13:26:04 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 13:26:06 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/12 11:37:31 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../header_file/push_swap.h"
 
 /*
 ** =========================

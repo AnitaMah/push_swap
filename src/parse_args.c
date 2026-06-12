@@ -5,92 +5,139 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 15:01:53 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 15:01:56 by anmakhov         ###   ########.fr       */
+/*   Created: 2026/06/12 14:20:00 by anmakhov          #+#    #+#             */
+/*   Updated: 2026/06/12 14:44:09 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../header_file/push_swap.h"
 
-/*
-** =========================
-**      NODE OPS
-** =========================
-*/
-static t_node	*new_node(int value)
+int	check_duplicates(int *array, int size)
 {
-	t_node	*node;
+	int	i;
+	int	j;
 
-	node = malloc(sizeof(t_node));
-	if (!node)
-		return (NULL);
-	node->value = value;
-	node->index = -1;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
-}
-
-static void	add_back(t_stack *a, t_node *node)
-{
-	if (!a->top)
+	i = 0;
+	while (i < size)
 	{
-		a->top = node;
-		a->bottom = node;
-	}
-	else
-	{
-		a->bottom->next = node;
-		node->prev = a->bottom;
-		a->bottom = node;
-	}
-	a->size++;
-}
-
-/*
-** =========================
-**      CHECKERS
-** =========================
-*/
-static int	has_duplicate(t_stack *a, int value)
-{
-	t_node	*cur;
-
-	cur = a->top;
-	while (cur)
-	{
-		if (cur->value == value)
-			return (1);
-		cur = cur->next;
+		j = i + 1;
+		while (j < size)
+		{
+			if (array[i] == array[j])
+				return (1);
+			j++;
+		}
+		i++;
 	}
 	return (0);
 }
 
 /*
-** =========================
-**      MAIN PARSER
-** =========================
+** Звільняє пам'ять, виділену функцією ft_split
 */
-int	parse_args(t_stack *a, char **argv)
+static void	free_split(char **arr)
 {
-	int		i;
-	int		value;
-	int		error;
-	t_node	*node;
+	int	i;
 
 	i = 0;
-	while (argv[i])
+	while (arr[i])
 	{
-		value = ft_atoi_ps(argv[i], &error);
-		if (error)
-			return (0);
-		if (has_duplicate(a, value))
-			return (0);
-		node = new_node(value);
-		if (!node)
-			return (0);
-		add_back(a, node);
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+/*
+** Рахує загальну кількість чисел у всіх аргументах разом узятих.
+** Якщо знаходить порожній аргумент (""), повертає -1 (помилка).
+*/
+static int	count_total_words(int argc, char **argv)
+{
+	int		i;
+	int		j;
+	int		count;
+	char	**split;
+
+	i = 1;
+	count = 0;
+	while (i < argc)
+	{
+		split = ft_split(argv[i], ' ');
+		if (!split || !split[0])
+		{
+			if (split)
+				free_split(split);
+			return (-1);
+		}
+		j = 0;
+		while (split[j])
+		{
+			count++;
+			j++;
+		}
+		free_split(split);
+		i++;
+	}
+	return (count);
+}
+
+/*
+** Проходить по всіх аргументах,
+	сплітить їх і заповнює масив інтами з валідацією
+*/
+static int	fill_all_nums(int argc, char **argv, int *nums)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		error;
+	char	**split;
+
+	i = 1;
+	k = 0;
+	while (i < argc)
+	{
+		split = ft_split(argv[i], ' ');
+		j = 0;
+		while (split[j])
+		{
+			error = 0;
+			if (!is_valid_number(split[j]))
+				return (free_split(split), 0);
+			nums[k] = ft_atoi_ps(split[j], &error);
+			if (error)
+				return (free_split(split), 0);
+			k++;
+			j++;
+		}
+		free_split(split);
 		i++;
 	}
 	return (1);
+}
+
+/*
+** ГОЛОВНИЙ ПАРСЕР
+*/
+int	*parse_args(int argc, char **argv, int *size)
+{
+	int	*nums;
+	int	len;
+
+	if (argc < 2)
+		return (NULL);
+	len = count_total_words(argc, argv);
+	if (len <= 0)
+		return (NULL);
+	nums = malloc(sizeof(int) * len);
+	if (!nums)
+		return (NULL);
+	if (!fill_all_nums(argc, argv, nums))
+	{
+		free(nums);
+		return (NULL);
+	}
+	*size = len;
+	return (nums);
 }

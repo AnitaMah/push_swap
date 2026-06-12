@@ -6,15 +6,15 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 15:05:15 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/11 15:05:16 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/12 14:00:37 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../header_file/push_swap.h"
 
 /*
-** Counts operations needed to bring a node to top using rotate (ra/rra)
-** Returns positive for ra, negative for rra
+** Counts operations needed to bring a node to top using rotate
+** Returns positive for rotate, negative for reverse rotate
 */
 static int	count_operations_to_top(t_stack *stack, t_node *target)
 {
@@ -40,8 +40,8 @@ static int	count_operations_to_top(t_stack *stack, t_node *target)
 }
 
 /*
-** Brings target node to the top of stack using ra or rra
-** Uses whichever is more efficient
+** Brings target node to the top of stack using appropriate operations
+** Uses stack->name ('a' or 'b') to dynamically choose between ra/rb and rra/rrb
 */
 void	bring_to_top(t_stack *stack, t_node *target)
 {
@@ -54,7 +54,10 @@ void	bring_to_top(t_stack *stack, t_node *target)
 	{
 		while (ops > 0)
 		{
-			ra(stack);
+			if (stack->name == 'a')
+				ra(stack);
+			else
+				rb(stack);
 			ops--;
 		}
 	}
@@ -63,7 +66,10 @@ void	bring_to_top(t_stack *stack, t_node *target)
 		ops = -ops;
 		while (ops > 0)
 		{
-			rra(stack);
+			if (stack->name == 'a')
+				rra(stack);
+			else
+				rrb(stack);
 			ops--;
 		}
 	}
