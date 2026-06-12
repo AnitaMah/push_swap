@@ -6,7 +6,7 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:21:42 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 14:48:52 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/12 15:48:57 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,22 @@ static void	select_sort(t_stack *a, t_stack *b, int size, double disorder)
 		sort_four_five(a, b, size);
 	else
 	{
-		if (disorder < 0.25)
-			selection_sort_adaptation(a, b);
-		else if (disorder < 0.55)
-			chunk_sort(a, b);
+		if (size <= 100)
+		{
+			if (disorder < 0.15)
+				selection_sort_adaptation(a, b);
+			else
+				chunk_sort(a, b);
+		}
 		else
-			radix_sort(a, b);
+		{
+			if (disorder < 0.20)
+				selection_sort_adaptation(a, b);
+			else if (disorder < 0.85)
+				chunk_sort(a, b);
+			else
+				radix_sort(a, b);
+		}
 	}
 }
 
