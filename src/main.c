@@ -1,46 +1,23 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/12 12:21:42 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 15:48:57 by anmakhov         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../header_file/push_swap.h"
-#include <stdio.h>
 
-/*
-** Prints error message.
-*/
 static int	handle_error(void)
 {
 	write(2, "Error\n", 6);
 	return (1);
 }
 
-/*
-** Frees both stacks safely.
-*/
 static void	cleanup(t_stack *a, t_stack *b)
 {
 	free_stack(a);
 	free_stack(b);
 }
 
-/*
-** Builds stack, checks parsing, and validates duplicates.
-*/
 static int	init_and_fill_stack(t_stack *a, int argc, char **argv, int **arr,
 		int *size)
 {
 	*arr = parse_args(argc, argv, size);
 	if (!*arr || *size <= 0)
 		return (0);
-	/* 1. ADDED: Check for duplicates directly after parsing */
 	if (check_duplicates(*arr, *size))
 	{
 		free(*arr);
@@ -51,39 +28,31 @@ static int	init_and_fill_stack(t_stack *a, int argc, char **argv, int **arr,
 		free(*arr);
 		return (0);
 	}
-	/* FIX: Removed free(*arr) from here so main can use it for disorder calculation */
 	return (1);
 }
 
-/*
-** Selects sorting algorithm based on disorder.
-*/
 static void	select_sort(t_stack *a, t_stack *b, int size, double disorder)
 {
-	if (size == 2)
-		sort_two(a);
-	else if (size == 3)
+	if (size <= 1)
+		return ;
+	if (size <= 3)
 		sort_three(a);
-	else if (size == 4 || size == 5)
+	else if (size <= 4 || size <= 5)
 		sort_four_five(a, b, size);
+	else if (size <= 100)
+	{
+		if (disorder < 0.15)
+			selection_sort_adaptation(a, b);
+		else
+			chunk_sort(a, b);
+	}
 	else
 	{
-		if (size <= 100)
-		{
-			if (disorder < 0.15)
-				selection_sort_adaptation(a, b);
-			else
-				chunk_sort(a, b);
-		}
+		// Для великих стеків (500+)
+		if (disorder < 0.10)
+			selection_sort_adaptation(a, b);
 		else
-		{
-			if (disorder < 0.20)
-				selection_sort_adaptation(a, b);
-			else if (disorder < 0.85)
-				chunk_sort(a, b);
-			else
-				radix_sort(a, b);
-		}
+			radix_sort(a, b);
 	}
 }
 
@@ -102,9 +71,7 @@ int	main(int argc, char **argv)
 	if (!init_and_fill_stack(&a, argc, argv, &arr, &size))
 		return (handle_error());
 	if (is_sorted(&a))
-	{
 		return (cleanup(&a, &b), 0);
-	}
 	disorder = compute_disorder(arr, size);
 	free(arr);
 	normalize_index(&a);

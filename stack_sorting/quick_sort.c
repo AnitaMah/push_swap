@@ -1,42 +1,32 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   quick_sort.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/02 12:07:15 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 12:31:57 by anmakhov         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../header_file/push_swap.h"
-
+/*
+** Lomuto partition scheme:
+** Гарантовано ставить pivot на правильне місце і повертає його індекс.
+*/
 int	partition(int *arr, int left, int right)
 {
-	int	pivot;
 	int	i;
 	int	j;
 	int	tmp;
 
-	pivot = arr[(left + right) / 2];
+	int pivot = arr[right]; // Беремо останній елемент як pivot
 	i = left;
-	j = right;
-	while (i <= j)
+	j = left;
+	while (j < right)
 	{
-		while (arr[i] < pivot)
-			i++;
-		while (arr[j] > pivot)
-			j--;
-		if (i <= j)
+		if (arr[j] < pivot)
 		{
+			// Міняємо місцями arr[i] та arr[j]
 			tmp = arr[i];
 			arr[i] = arr[j];
 			arr[j] = tmp;
 			i++;
-			j--;
 		}
+		j++;
 	}
+	// Ставимо pivot на його фінальне місце
+	tmp = arr[i];
+	arr[i] = arr[right];
+	arr[right] = tmp;
 	return (i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:22:03 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 14:22:49 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/12 16:26:45 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,77 @@ void	sort_three(t_stack *a)
 		rra(a);
 }
 
+/*
+** Допоміжна функція: знаходить індекс (позицію) мінімального значення в стеку
+*/
+static int	get_min_pos(t_stack *stack)
+{
+	t_node	*curr;
+	int		min_val;
+	int		min_pos;
+	int		pos;
+
+	curr = stack->top;
+	min_val = curr->value;
+	min_pos = 0;
+	pos = 0;
+	while (curr)
+	{
+		if (curr->value < min_val)
+		{
+			min_val = curr->value;
+			min_pos = pos;
+		}
+		curr = curr->next;
+		pos++;
+	}
+	return (min_pos);
+}
+
+/*
+** Допоміжна функція: рахує поточну кількість елементів у стеку
+*/
+static int	get_stack_size(t_stack *stack)
+{
+	t_node	*curr;
+	int		size;
+
+	curr = stack->top;
+	size = 0;
+	while (curr)
+	{
+		size++;
+		curr = curr->next;
+	}
+	return (size);
+}
+
+/*
+** ВИПРАВЛЕНА ФУНКЦІЯ: тепер вона дійсно крутить стек і перекидає мінімуми
+*/
 void	sort_four_five(t_stack *a, t_stack *b, int size)
 {
+	int	min_pos;
+	int	cur_size;
+
 	while (size > 3)
 	{
+		min_pos = get_min_pos(a);
+		cur_size = get_stack_size(a);
+		if (min_pos <= cur_size / 2)
+		{
+			while (min_pos-- > 0)
+				ra(a);
+		}
+		else
+		{
+			while (min_pos++ < cur_size)
+				rra(a);
+		}
+		pb(a, b); // Кидаємо найменший елемент в Б
 		size--;
 	}
-	sort_three(a);
+	sort_three(a); // Сортуємо 3 елементи, що залишилися в А
 	while (b->top)
-		pa(a, b);
+		pa(a, b); // Повертаємо все назад
 }
