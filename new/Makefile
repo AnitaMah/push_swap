@@ -5,29 +5,26 @@
 #                                                     +:+ +:+         +:+      #
 #    By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/06/12 11:26:53 by anmakhov          #+#    #+#              #
-#    Updated: 2026/06/15 14:07:24 by anmakhov         ###   ########.fr        #
+#    Created: 2026/06/15 14:33:23 by anmakhov          #+#    #+#              #
+#    Updated: 2026/06/15 14:33:23 by anmakhov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibft
+CFLAGS = -Wall -Wextra -Werror -Iheader_file -Ilibft
 
 LIBFT = libft/libft.a
 
 SRC = main/main.c \
-	main/init_stack.c \
-	main/parse_args.c \
 	main/is_sorted.c \
-	main/free_stack.c \
 	main/compute_disorder.c \
 	main/normalize_index.c \
 	main/stack_from_array.c \
 	\
 	untils/untils_parsing.c \
-	untils/ft_atoi_ps.c \
+	untils/new_pasring.c \
 	\
 	stack_operations/push.c \
 	stack_operations/reverse.c \
