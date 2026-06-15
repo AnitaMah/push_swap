@@ -6,7 +6,7 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:22:03 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 16:26:45 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/15 13:47:44 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ void	sort_four_five(t_stack *a, t_stack *b, int size)
 			while (min_pos++ < cur_size)
 				rra(a);
 		}
-		pb(a, b); // Кидаємо найменший елемент в Б
+		pb(a, b);
 		size--;
 	}
-	sort_three(a); // Сортуємо 3 елементи, що залишилися в А
+	sort_three(a);
 	while (b->top)
-		pa(a, b); // Повертаємо все назад
+		pa(a, b);
 }

@@ -6,7 +6,7 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 22:01:14 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 14:00:51 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/15 13:45:18 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	selection_sort_adaptation(t_stack *a, t_stack *b)
 		min = find_min_node(a);
 		if (!min)
 			return ;
-		bring_to_top(a, min); // <== Додали 'a',
+		bring_to_top(a, min);
 		pb(a, b);
 	}
 	restore_to_a(a, b);

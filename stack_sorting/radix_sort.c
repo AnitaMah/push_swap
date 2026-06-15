@@ -6,7 +6,7 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 12:07:04 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 13:18:53 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/15 13:45:27 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static int	get_max_bits(t_stack *a)
 */
 void	radix_sort(t_stack *a, t_stack *b)
 {
-	int max_bits;
-	int size;
-	int i;
+	int	max_bits;
+	int	size;
+	int	i;
 
 	if (!a || !a->top)
 		return ;

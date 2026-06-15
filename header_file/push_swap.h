@@ -6,7 +6,7 @@
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 15:02:38 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 14:44:02 by anmakhov         ###   ########.fr       */
+/*   Updated: 2026/06/15 13:50:08 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ typedef struct s_stack
 	int				chunk_size;
 	char			name;
 }					t_stack;
+
+typedef struct s_input
+{
+	int				*arr;
+	int				size;
+}					t_input;
 
 /* =========================================================
 ** STACK OPERATIONS
@@ -169,5 +175,7 @@ int					check_duplicates(int *array, int size);
 void				sort_four_five(t_stack *a, t_stack *b, int size);
 void				sort_three(t_stack *a);
 void				sort_two(t_stack *a);
+int					fill_single_split(char **split, int *nums, int *k);
+int					count_words_in_split(char **split);
 
 #endif
