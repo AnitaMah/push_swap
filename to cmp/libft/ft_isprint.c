@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 15:01:36 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 13:59:24 by anmakhov         ###   ########.fr       */
+/*   Created: 2026/04/20 16:13:10 by anmakhov          #+#    #+#             */
+/*   Updated: 2026/04/27 15:21:15 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_file/push_swap.h"
+#include "libft.h"
 
-/*
-** Initializes stack structure:
-** - top = NULL
-** - bottom = NULL
-** - size = 0
-** - chunk_size = 0
-** - name = 'a' or 'b'
-*/
-void	init_stack(t_stack *stack, char name)
+int	ft_isprint(int c)
 {
-	if (!stack)
-		return ;
-	stack->top = NULL;
-	stack->bottom = NULL;
-	stack->size = 0;
-	stack->chunk_size = 0;
-	stack->name = name;
+	if (c >= 32 && c <= 126)
+	{
+		return (1);
+	}
+	return (0);
 }

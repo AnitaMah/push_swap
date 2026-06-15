@@ -1,42 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_stack.c                                       :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anmakhov <anmakhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 15:01:03 by anmakhov          #+#    #+#             */
-/*   Updated: 2026/06/12 11:37:16 by anmakhov         ###   ########.fr       */
+/*   Created: 2026/04/20 16:13:10 by anmakhov          #+#    #+#             */
+/*   Updated: 2026/04/27 15:21:15 by anmakhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_file/push_swap.h"
+#include "libft.h"
 
-/*
-** =========================
-**      CORE LOGIC
-** =========================
-*/
-
-/*
-** Frees all nodes in stack and resets structure
-*/
-void	free_stack(t_stack *a)
+int	ft_isprint(int c)
 {
-	t_node	*cur;
-	t_node	*next;
-
-	if (!a)
-		return ;
-	cur = a->top;
-	while (cur)
+	if (c >= 32 && c <= 126)
 	{
-		next = cur->next;
-		free(cur);
-		cur = next;
+		return (1);
 	}
-	a->top = NULL;
-	a->bottom = NULL;
-	a->size = 0;
-	a->chunk_size = 0;
+	return (0);
 }
